@@ -1,6 +1,5 @@
 require_relative 'game_adventure'
-
-
+# Epic mode for playing some blackjack.
 class EpicGame < AdventureGame
   attr_accessor :game_results
 
@@ -13,12 +12,8 @@ class EpicGame < AdventureGame
 
   def play
     deal
-    unless blackjack?(dealer_hand) || blackjack?(player_hand)
-      player_choice
-    end
-    unless blackjack?(dealer_hand) || blackjack?(player_hand) || bust?(player_hand)
-      dealer_choice
-    end
+    player_choice unless blackjack?(dealer_hand) || blackjack?(player_hand)
+    dealer_choice unless blackjack?(dealer_hand) || blackjack?(player_hand) || bust?(player_hand)
     output_results(winner)
     play_again
   end
@@ -33,7 +28,7 @@ class EpicGame < AdventureGame
   end
 
   def check_for_aces(hand)
-    high_aces = hand.select { |card| card.face == "Ace" && card.value == 11 }
+    high_aces = hand.select { |card| card.face == 'Ace' && card.value == 11 }
     high_aces.first.value = 1 if high_aces.any?
   end
 
@@ -47,12 +42,12 @@ class EpicGame < AdventureGame
   end
 
   def play_again
-    puts "Would you like to play again? [y/n]"
+    puts 'Would you like to play again? [y/n]'
     response = STDIN.gets.chomp
-    if response == "y"
+    if response == 'y'
       reset
       play
-    elsif response == "n"
+    elsif response == 'n'
       output_final
       exit
     else
@@ -61,10 +56,10 @@ class EpicGame < AdventureGame
   end
 
   def output_final
-    player_wins = game_results.count { |winner| winner == "Player" }
-    dealer_wins = game_results.count { |winner| winner == "Dealer" }
+    player_wins = game_results.count { |winner| winner == 'Player' }
+    dealer_wins = game_results.count { |winner| winner == 'Dealer' }
     puts "You won #{player_wins} times and the dealer won #{dealer_wins}."
-    puts "Play again soon!"
+    puts 'Play again soon!'
   end
 
   def reset
@@ -89,5 +84,6 @@ class Deck
     end
     cards.flatten!
   end
-
 end
+
+EpicGame.new.play
