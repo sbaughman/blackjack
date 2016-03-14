@@ -1,7 +1,6 @@
 require_relative 'deck'
-
+# Basic game for normal mode
 class Game
-
   attr_accessor :dealer_hand,
                 :player_hand,
                 :deck,
@@ -39,10 +38,10 @@ class Game
   def player_choice
     puts "Would you like to 'hit' or 'stand'? [h/s]"
     choice = STDIN.gets.chomp
-    if choice == "h"
+    if choice == 'h'
       hit(player_hand)
       output_hand(player_hand)
-    elsif choice == "s"
+    elsif choice == 's'
       self.player_done = true
       true
     else
@@ -67,9 +66,9 @@ class Game
     player = get_value(player_hand)
     dealer = get_value(dealer_hand)
     if player == 21 || dealer > 21 || (player > dealer && !bust?(player_hand)) || player == dealer
-      "Player"
+      'Player'
     else
-      "Dealer"
+      'Dealer'
     end
   end
 
@@ -85,7 +84,6 @@ class Game
     return object.value if object.respond_to? :value
     object.inject(0) { |sum, card| sum += card.value }
   end
-
 end
 
 Game.new.play
