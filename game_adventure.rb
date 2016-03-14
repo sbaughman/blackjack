@@ -1,15 +1,10 @@
 require_relative 'game'
-
+# Game class for adventure mode.
 class AdventureGame < Game
-
   def play
     deal
-    unless blackjack?(dealer_hand) || blackjack?(player_hand)
-      player_choice
-    end
-    unless blackjack?(dealer_hand) || blackjack?(player_hand) || bust?(player_hand)
-      dealer_choice
-    end
+    player_choice unless blackjack?(dealer_hand) || blackjack?(player_hand)
+    dealer_choice unless blackjack?(dealer_hand) || blackjack?(player_hand) || bust?(player_hand)
     output_results(winner)
   end
 
@@ -23,12 +18,12 @@ class AdventureGame < Game
     unless blackjack?(player_hand) || bust?(player_hand) || more_than_five?
       puts "Would you like to 'hit' or 'stand'? [h/s]"
       choice = STDIN.gets.chomp
-      if choice == "h"
+      if choice == 'h'
         hit(player_hand)
         bust?(player_hand)
         output_hand(player_hand)
         player_choice
-      elsif choice != "s"
+      elsif choice != 's'
         puts "I didn't understand that"
         player_choice
       end
@@ -39,9 +34,9 @@ class AdventureGame < Game
     player = get_value(player_hand)
     dealer = get_value(dealer_hand)
     if player == 21 && dealer != 21 || dealer > 21 || (more_than_five? || player > dealer) && player < 21
-      "Player"
+      'Player'
     else
-      "Dealer"
+      'Dealer'
     end
   end
 
@@ -56,5 +51,6 @@ class AdventureGame < Game
   def more_than_five?
     player_hand.length > 5
   end
-
 end
+
+AdventureGame.new.play
