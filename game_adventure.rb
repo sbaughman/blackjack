@@ -52,5 +52,3 @@ class AdventureGame < Game
     player_hand.length > 5
   end
 end
-
-AdventureGame.new.play

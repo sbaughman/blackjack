@@ -85,5 +85,3 @@ class Game
     object.inject(0) { |sum, card| sum += card.value }
   end
 end
-
-Game.new.play
