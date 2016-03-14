@@ -1,3 +1,4 @@
+# Defines what a card is.
 class Card
   def self.suits
     %w(hearts diamonds clubs spades)
