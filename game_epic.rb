@@ -50,8 +50,7 @@ class EpicGame < AdventureGame
     elsif response == 'n'
       output_final
       exit
-    else
-      play_again
+    else play_again
     end
   end
 
@@ -67,11 +66,9 @@ class EpicGame < AdventureGame
     self.dealer_hand = []
     self.player_hand = []
   end
-
 end
-
+# This is a deck for shoe mode.
 class Deck
-
   def initialize
     self.cards = []
     make_shoe
