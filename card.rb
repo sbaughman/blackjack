@@ -1,5 +1,4 @@
 class Card
-
   def self.suits
     %w(hearts diamonds clubs spades)
   end
@@ -27,5 +26,4 @@ class Card
   def set_value
     self.class.blackjack_values[face].to_i
   end
-
 end
