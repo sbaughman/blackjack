@@ -16,18 +16,14 @@ class Game
 
   def play
     deal
-    until player_done || bust?(player_hand) || blackjack?
-      player_choice
-    end
-    until get_value(dealer_hand) > 16 || bust?(dealer_hand) || blackjack?
-      hit(dealer_hand)
-    end
+    player_choice until player_done || bust?(player_hand) || blackjack?
+    hit(dealer_hand) until get_value(dealer_hand) > 16 || bust?(dealer_hand) || blackjack?
     output_results(winner)
   end
 
   def deal
-    self.dealer_hand.push(deck.draw, deck.draw)
-    self.player_hand.push(deck.draw, deck.draw)
+    dealer_hand.push(deck.draw, deck.draw)
+    player_hand.push(deck.draw, deck.draw)
     puts "\nDealer Hand:\n*********  face-down card\n#{dealer_hand[0].face} of #{dealer_hand[0].suit}, value #{get_value(dealer_hand[0])}.\n"
     puts "\nPlayer Hand: "
     puts "\n #{output_hand(player_hand)}"
@@ -91,3 +87,5 @@ class Game
   end
 
 end
+
+Game.new.play
