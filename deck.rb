@@ -1,7 +1,6 @@
 require_relative 'card'
-
+# This defines the deck of cards.
 class Deck
-
   attr_accessor :cards
 
   def initialize
@@ -26,5 +25,4 @@ class Deck
   def draw
     cards.shift
   end
-
 end
